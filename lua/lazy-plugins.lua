@@ -196,39 +196,6 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  {
-    "nvim-tree/nvim-tree.lua",
-    lazy = false,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      on_attach = function(bufnr)
-        local api = require "nvim-tree.api"
-
-        local function opts(desc)
-          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
-
-        -- default mappings
-        api.config.mappings.default_on_attach(bufnr)
-
-        -- custom mappings
-        -- vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
-      end
-    },
-    config = function(_, opts)
-      -- Required for nvim-tree
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-      -- set termguicolors to enable highlight groups
-      vim.opt.termguicolors = true
-
-      require("nvim-tree").setup(opts)
-      local nvim_tree_api = require "nvim-tree.api"
-      vim.keymap.set('n', '<leader>f', nvim_tree_api.tree.toggle, { desc = '[F]ile Tree Toggle' })
-    end,
-  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -241,7 +208,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- vim: ts=2 sts=2 sw=2 et
