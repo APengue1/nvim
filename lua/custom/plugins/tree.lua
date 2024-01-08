@@ -28,8 +28,14 @@ return {
       vim.opt.termguicolors = true
 
       require("nvim-tree").setup(opts)
+
       local nvim_tree_api = require "nvim-tree.api"
-      vim.keymap.set('n', '<leader>f', nvim_tree_api.tree.toggle, { desc = '[F]ile Tree Toggle' })
+
+      require('which-key').register {
+        ['<leader>f'] = { name = '[F]ile Tree', _ = 'which_key_ignore' },
+      }
+      vim.keymap.set('n', '<leader>ft', nvim_tree_api.tree.toggle, { desc = '[F]ile Tree [T]oggle' })
+      vim.keymap.set('n', '<leader>ff', nvim_tree_api.tree.open, { desc = '[F]ile Tree [F]ocus' })
     end,
   },
 }
