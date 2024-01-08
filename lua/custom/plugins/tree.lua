@@ -30,12 +30,47 @@ return {
       require("nvim-tree").setup(opts)
 
       local nvim_tree_api = require "nvim-tree.api"
+      local tree_view = require "nvim-tree.view"
 
       require('which-key').register {
         ['<leader>f'] = { name = '[F]ile Tree', _ = 'which_key_ignore' },
       }
       vim.keymap.set('n', '<leader>ft', nvim_tree_api.tree.toggle, { desc = '[F]ile Tree [T]oggle' })
       vim.keymap.set('n', '<leader>ff', nvim_tree_api.tree.open, { desc = '[F]ile Tree [F]ocus' })
+      vim.keymap.set('n', '<leader>fr', nvim_tree_api.tree.reload, { desc = '[F]ile Tree [R]efresh' })
+      vim.keymap.set('n', '<leader>fb', nvim_tree_api.tree.find_file, { desc = '[F]ile Tree At [B]uffer' })
+      vim.keymap.set('n', '<leader>fc',
+        function ()
+          nvim_tree_api.tree.collapse_all(false)
+        end,
+        { desc = '[F]ile Tree [C]ollapse' }
+      )
+      vim.keymap.set('n', '<leader>fB',
+        function ()
+          nvim_tree_api.tree.collapse_all(false)
+          nvim_tree_api.tree.find_file({ open = true, focus = true, })
+        end,
+        { desc = '[F]ile Tree at [B]uffer, Collapse The Rest' }
+      )
+      vim.keymap.set('n', '<leader>fC',
+        function ()
+          nvim_tree_api.tree.collapse_all(true)
+          nvim_tree_api.tree.find_file({ open = true })
+        end,
+        { desc = '[F]ile Tree [C]ollapse Except Buffers' }
+      )
+      vim.keymap.set('n', '<leader>f+',
+        function ()
+          tree_view.resize('+5')
+        end,
+        { desc = '[F]ile Tree [+] Width' }
+      )
+      vim.keymap.set('n', '<leader>f-',
+        function ()
+          tree_view.resize('-5')
+        end,
+        { desc = '[F]ile Tree [-] Width' }
+      )
     end,
   },
 }
