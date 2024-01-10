@@ -39,10 +39,14 @@ return {
         vim.cmd(':bdelete')
       end
 
-      vim.keymap.set('n', '<A-[>', previous_buffer, { desc = 'Previous buffer' })
-      vim.keymap.set('n', '<A-]>', next_buffer, { desc = 'Next buffer' })
-      vim.keymap.set('n', '<A-\\>', close_current_buffer, { desc = 'Close buffer' })
-      vim.keymap.set('n', '<A-BS>', close_all_buffers, { desc = 'Close all buffers' })
+      require('which-key').register {
+        ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
+      }
+
+      vim.keymap.set('n', '[b', previous_buffer, { desc = 'Previous buffer' })
+      vim.keymap.set('n', ']b', next_buffer, { desc = 'Next buffer' })
+      vim.keymap.set('n', '<leader>bd', close_current_buffer, { desc = '[B]uffer [D]elete' })
+      vim.keymap.set('n', '<leader>bD', close_all_buffers, { desc = '[B]uffer [D]elete All' })
     end
   }
 }
