@@ -39,6 +39,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-require 'custom.options'
+require 'custom.settings.options'
 
 -- vim: ts=2 sts=2 sw=2 et
