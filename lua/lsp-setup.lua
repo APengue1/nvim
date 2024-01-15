@@ -82,6 +82,8 @@ local servers = {
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   tsserver = {},
   eslint = {},
+  solargraph = {},
+  rubocop = {},
 
   lua_ls = {
     Lua = {
