@@ -2,10 +2,13 @@
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
-    layout_strategy = "vertical",
+    layout_strategy = "horizontal",
     layout_config = {
-      vertical = {
+      horizontal = {
+        height = { padding = 0 },
+        width = { padding = 0 },
         preview_cutoff = 0,
+        preview_width = 0.5,
       },
     },
     mappings = {
