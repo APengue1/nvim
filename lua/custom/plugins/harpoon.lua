@@ -35,7 +35,7 @@ return {
         )
 
         vim.keymap.set("n", "<leader>hx", function()
-            harpoon:list():append()
+            harpoon:list():add()
             end,
             { desc = "Harpoon the buffer" }
         )

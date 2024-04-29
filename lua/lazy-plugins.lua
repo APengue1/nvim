@@ -58,6 +58,7 @@ require('lazy').setup({
     opts = {
       -- See `:help gitsigns.txt`
       current_line_blame = true,
+      attach_to_untracked = true,
       signs = {
         add = { text = '+' },
         change = { text = '~' },
