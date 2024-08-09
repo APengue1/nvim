@@ -20,8 +20,8 @@ return {
       lua = { "stylua" },
       go = { "gofmt" },
       ruby = { "rubocop" },
-      javascript = { "eslint_d", { "prettierd", "prettier" } },
-      typescript = { "eslint_d", { "prettierd", "prettier" } },
+      javascript = { "eslint_d", { "prettier", "prettierd" } },
+      typescript = { "eslint_d", { "prettier", "prettierd" } },
     },
     -- Set up format-on-save
     format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
