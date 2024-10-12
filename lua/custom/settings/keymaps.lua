@@ -35,45 +35,37 @@ vim.keymap.set(
 )
 
 local git_repo_base_url = function()
-	local http_remote_url = vim.fn.system("git remote get-url origin 2>/dev/null | sed 's/\\.git//'")
+	local remote_url = vim.fn.system("git remote get-url origin 2>/dev/null | sed 's/\\.git//'")
 
 	-- if ssh
-	if (http_remote_url:find("@")) then
-		http_remote_url = http_remote_url:gsub([[git@]], ""):gsub(":", "/")
+	if remote_url:find("@") then
+		remote_url = remote_url:gsub([[git@]], ""):gsub(":", "/")
 	end
 
-	local head_commit = vim.fn.system('git rev-parse HEAD 2>/dev/null')
-	local base_url = http_remote_url..'/blob/'..head_commit
+	local head = vim.fn.system('git rev-parse HEAD 2>/dev/null')
+	local base_url = remote_url..'/blob/'..head
 
 	-- remove any whitespace from url
-	base_url = base_url:gsub("%s+", "")
-
-	vim.fn.setreg('+', base_url)
-	return base_url
+	return base_url:gsub("%s+", "")
 end
 
-local git_repo_file_url = function()
-	local base_url = git_repo_base_url()
+local git_yank_url = function(type)
+	return function()
+		local url = git_repo_base_url()
 
-	local buffer_relative_path = vim.fn.expand('%')
-	local git_relative_path = vim.fn.system("git ls-files "..buffer_relative_path)
-	local url_with_file = base_url..'/'..git_relative_path
+		if type == 'file' then
+			url = url.."/"..vim.fn.system("git ls-files "..vim.fn.expand("%"))
+		end
 
-	vim.fn.setreg('+', url_with_file)
-	return url_with_file
+		if vim.api.nvim_get_mode().mode == 'V' then
+			url = url.."#L"..vim.fn.line('v').."-L"..vim.fn.line('.')
+		end
+
+		vim.fn.setreg('+', url)
+		vim.api.nvim_echo({{url}}, false, {})
+		vim.api.nvim_input('<Esc>')
+	end
 end
 
-local git_repo_file_url_range = function()
-	local url_with_file = git_repo_file_url()
-	local range_start = vim.fn.line('v')
-	local range_end = vim.fn.line('.')
-
-	local url_with_file_range = url_with_file..'#L'..range_start..'-L'..range_end
-
-	vim.fn.setreg('+', url_with_file_range)
-	vim.api.nvim_input('<Esc>')
-end
-
-vim.keymap.set("n", "<leader>gk", git_repo_file_url, { desc = "git url file" })
-vim.keymap.set("n", "<leader>gK", git_repo_base_url, { desc = "git url base" })
-vim.keymap.set("v", "<leader>gk", git_repo_file_url_range, { desc = "git url selection" })
+vim.keymap.set({'n', 'v'}, "<leader>gk", git_yank_url('file'), { desc = "git yank url/filepath#range" })
+vim.keymap.set("n", "<leader>gK", git_yank_url(), { desc = "git yank url" })
