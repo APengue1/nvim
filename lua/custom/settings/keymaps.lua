@@ -39,7 +39,7 @@ local git_repo_base_url = function()
 
 	-- if ssh
 	if remote_url:find("@") then
-		remote_url = remote_url:gsub([[git@]], ""):gsub(":", "/")
+		remote_url = "https://"..remote_url:gsub([[git@]], ""):gsub(":", "/")
 	end
 
 	local head = vim.fn.system('git rev-parse HEAD 2>/dev/null')
