@@ -79,7 +79,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-  tsserver = {},
+  ts_ls = {},
   eslint = {},
   solargraph = {},
   rubocop = {},
