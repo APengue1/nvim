@@ -54,7 +54,7 @@ local git_yank_url = function(type)
 		local url = git_repo_base_url()
 
 		if type == 'file' then
-			url = url.."/"..vim.fn.system("git ls-files "..vim.fn.expand("%"))
+			url = url.."/"..vim.fn.system("git ls-files "..vim.fn.expand("%")):gsub("[\n\r]", "")
 		end
 
 		if vim.api.nvim_get_mode().mode == 'V' then
@@ -62,7 +62,7 @@ local git_yank_url = function(type)
 		end
 
 		vim.fn.setreg('+', url)
-		vim.api.nvim_echo({{url}}, false, {})
+		vim.api.nvim_echo({{url..'\n'}}, false, {})
 		vim.api.nvim_input('<Esc>')
 	end
 end
