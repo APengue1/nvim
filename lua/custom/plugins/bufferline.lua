@@ -48,7 +48,6 @@ return {
       vim.keymap.set('n', '<leader>bB', previous_buffer, { desc = 'Previous buffer' })
       vim.keymap.set('n', '<leader>bb', next_buffer, { desc = 'Next buffer' })
       vim.keymap.set('n', '<leader>bd', close_current_buffer, { desc = '[B]uffer [D]elete' })
-      vim.keymap.set('n', '<leader>x', close_current_buffer, { desc = 'Close Current Buffer' })
       vim.keymap.set('n', '<leader>bD', close_all_buffers, { desc = '[B]uffer [D]elete All' })
     end
   }

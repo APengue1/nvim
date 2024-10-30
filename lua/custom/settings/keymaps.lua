@@ -34,6 +34,9 @@ vim.keymap.set(
 	{ desc = "[R]eplace" }
 )
 
+-- Quit current window, then select the window right of the filetree
+vim.keymap.set("n", "W", "<C-w>q<C-w>l")
+
 local git_repo_base_url = function()
 	local remote_url = vim.fn.system("git remote get-url origin 2>/dev/null | sed 's/\\.git//'")
 
