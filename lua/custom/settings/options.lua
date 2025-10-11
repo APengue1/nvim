@@ -4,6 +4,7 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 vim.opt.termguicolors = true
 
