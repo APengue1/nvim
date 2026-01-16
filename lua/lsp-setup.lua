@@ -83,6 +83,7 @@ local servers = {
   eslint = {},
   solargraph = {},
   rubocop = {},
+  jdtls = {},
 
   lua_ls = {
     Lua = {
